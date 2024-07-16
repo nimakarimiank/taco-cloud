@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Design your Taco</title>
+    <link rel="stylesheet" th:href="@{/styles/styles.css}">
+</head>
+<body>
+<h1>Design your taco</h1>
+<img th:src="@{/images/design.png}" width="400" height="400" alt="">
+    <form method="post" th:object="${taco}">
+        <div class="grid">
+            <div class="ingredient-group" id="wraps">
+                <h3>Design Your Wrap</h3>
+                <div th:each="ingredient : ${wrap}" >
+                    <label >
+                        <input type="checkbox" th:field="*{ingredientsList}" th:value="${ingredient.id}">
+                        <span th:text="${ingredient.name}"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="ingredient-group" id="proteins">
+                <h3>Design Your Protein</h3>
+                <div th:each="ingredient : ${protein}" >
+                    <label >
+                        <input type="checkbox" th:field="*{ingredientsList}" th:value="${ingredient.id}">
+                        <span th:text="${ingredient.name}"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="ingredient-group" id="cheeses">
+                <h3>Design Your Cheese</h3>
+                <div th:each="ingredient : ${cheese}" >
+                    <label >
+                        <input type="checkbox" th:field="*{ingredientsList}" th:value="${ingredient.id}">
+                        <span th:text="${ingredient.name}"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="ingredient-group" id="veggies">
+                <h3>Design Your Veggies</h3>
+                <div th:each="ingredient : ${veggies}" >
+                    <label >
+                        <input type="checkbox" th:field="*{ingredientsList}" th:value="${ingredient.id}">
+                        <span th:text="${ingredient.name}"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="ingredient-group" id="sauces">
+                <h3>Design Your Sauces</h3>
+                <div th:each="ingredient : ${sauce}" >
+                    <label >
+                        <input type="checkbox" th:field="*{ingredientsList}" th:value="${ingredient.id}">
+                        <span th:text="${ingredient.name}"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</body>
+</html>

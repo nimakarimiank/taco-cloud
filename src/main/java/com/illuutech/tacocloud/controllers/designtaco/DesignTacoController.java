@@ -7,6 +7,7 @@ import com.illuutech.tacocloud.domains.entities.TacoOrder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
 public class DesignTacoController {
 
     @ModelAttribute
-    public void addIngredientsToModel(Model model){
+    public void addIngredientsToModel(Model model) {
         List<Ingredients> ingredients = Arrays.asList(
                 new Ingredients("FLTO", "Flour Tortilla", Type.WRAP),
                 new Ingredients("COTO", "Corn Tortilla", Type.WRAP),
@@ -35,17 +36,16 @@ public class DesignTacoController {
                 new Ingredients("SLSA", "Salsa", Type.SAUCE),
                 new Ingredients("SRCR", "Sour Cream", Type.SAUCE)
         );
-    Type[] types = Type.values();
-    for (Type type: types){
-        model.addAttribute(type.toString().toLowerCase(),filterByType(ingredients,type));
-
-    }
+        Type[] types = Type.values();
+        for (Type type : types) {
+            model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
+        }
     }
 
     private Iterable<Ingredients> filterByType(List<Ingredients> ingredients, Type type) {
         return ingredients
                 .stream()
-                .filter(x->x.getType().equals(type))
+                .filter(x -> x.getType().equals(type))
                 .collect(Collectors.toList());
     }
 
@@ -58,5 +58,10 @@ public class DesignTacoController {
     public Taco taco() {
         return new Taco();
 
+    }
+
+    @GetMapping
+    public String getDesignTacoPage() {
+        return "design-taco";
     }
 }
