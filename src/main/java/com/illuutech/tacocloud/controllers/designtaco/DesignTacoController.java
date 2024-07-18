@@ -4,9 +4,11 @@ import com.illuutech.tacocloud.domains.entities.Ingredients;
 import com.illuutech.tacocloud.domains.entities.Ingredients.Type;
 import com.illuutech.tacocloud.domains.entities.Taco;
 import com.illuutech.tacocloud.domains.entities.TacoOrder;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -61,10 +63,13 @@ public class DesignTacoController {
     public String getDesignTacoPage() {
         return "design-taco";
     }
-    @PostMapping
-    public String receiveDesignedTaco(Taco taco, @ModelAttribute TacoOrder tacoOrder){
 
-        log.info("Processing Taco {}",taco);
+    @PostMapping
+    public String receiveDesignedTaco(@Valid Taco taco, Errors errors, @ModelAttribute TacoOrder tacoOrder) {
+        if (errors.hasErrors()) {
+            return "design-taco";
+        }
+        log.info("Processing Taco {}", taco);
         tacoOrder.addTacos(taco);
         return "redirect:/orders/current";
     }
