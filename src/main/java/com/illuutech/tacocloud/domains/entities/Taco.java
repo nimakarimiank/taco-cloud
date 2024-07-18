@@ -6,6 +6,7 @@ import java.util.List;
 
 @Data
 public class Taco {
+    private long id;
     private String name;
     private List<Ingredients> ingredientsList;
 
